@@ -7,7 +7,9 @@ namespace Word_Guess_Game
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string filePath = "../../../words.txt";
+            Console.WriteLine("Welcome to the Lord of the Rings Character Guessing Game!");
+            Console.WriteLine(" ");
         }
 
         static void HomeNavigation()
