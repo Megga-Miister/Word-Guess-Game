@@ -8,6 +8,8 @@ namespace Word_Guess_Game
         static void Main(string[] args)
         {
             string filePath = "../../../words.txt";
+            string[] words = { "FRODO", "GANDALF", "SAMWISE", "ARAGORN", "LEGOLAS", "GIMLI", "BOROMIR", "PEREGRIN", "MERIADOC" };
+
             Console.WriteLine("Welcome to the Lord of the Rings Character Guessing Game!");
             Console.WriteLine(" ");
         }
@@ -17,9 +19,18 @@ namespace Word_Guess_Game
 
         }
 
-        static void CreateWordFile(string filePath)
+        static void CreateWordFile(string filePath, string[] words)
         {
-
+            using (StreamWriter sw = new StreamWriter(filePath))
+            {
+                foreach (string word in words)
+                {
+                    if (word != null)
+                    {
+                        sw.WriteLine(word);
+                    }
+                }
+            }
         }
 
         static void AddWordToFile(string word)
