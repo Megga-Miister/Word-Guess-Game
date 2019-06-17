@@ -47,7 +47,7 @@ namespace Word_Guess_Game
             }
         }
 
-        static void AddWordToFile(string filePath, string newWord)
+        public static void AddWordToFile(string filePath, string newWord)
         {
             using (StreamWriter sw = File.AppendText(filePath))
             {
@@ -63,7 +63,7 @@ namespace Word_Guess_Game
         static string RemoveWordFromFile(string upperCaseWord)
         {
             string filePath = "../../../guessinggamewords.txt";
-            string[] fileWords = File.ReadAllLines(filePath);
+            string[] fileWords = ReadFile(filePath);
 
             for (int i = 0; i < fileWords.Length; i++)
             {
@@ -79,6 +79,12 @@ namespace Word_Guess_Game
             }
 
             CreateWordFile(filePath, fileWords);
+        }
+
+        public static string[] ReadFile(string filePath)
+        {
+            string[] wordsInFile = File.ReadAllLines(filePath);
+            return wordsInFile;
         }
 
         static void ExitGame()
