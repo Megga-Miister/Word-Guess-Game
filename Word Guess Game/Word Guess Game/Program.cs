@@ -151,7 +151,7 @@ namespace Word_Guess_Game
         {
             char[] preppedWordForGame = SelectRandomWordFromFile(filePath);
             char[] hiddenWord = BlankWordDisplay(preppedWordForGame);
-            string displayHiddenWord = hiddenWord.ToString();
+            string displayHiddenWord = String.Join(" ",hiddenWord);
             char[] guessedWord = WordDisplay(preppedWordForGame, ' ');
 
             Console.WriteLine($"\nPlease try to guess the following character: {displayHiddenWord}");
@@ -159,7 +159,9 @@ namespace Word_Guess_Game
             while (guessedWord != preppedWordForGame)
             {
                 char currentLetterGuess = UserLetterGuess();
-                WordDisplay(preppedWordForGame, currentLetterGuess);
+                char[] updatedBlankArray = WordDisplay(preppedWordForGame, currentLetterGuess);
+                string updatedHiddenWord = String.Join(" ", updatedBlankArray);
+                Console.WriteLine($"\nPlease try to guess the following character: {updatedHiddenWord}");
                 LetterGuessList(lettersFilePath, currentLetterGuess);
             }
 
@@ -187,7 +189,7 @@ namespace Word_Guess_Game
             string[] guessArray = ReadFile(lettersFilePath);
             string guessList = String.Join(" ", guessArray);
 
-            Console.WriteLine($"\nYou have guessed:{guessList}\n");
+            Console.WriteLine($"\nYou have guessed: {guessList}\n");
         }
 
         static void ReturnToMenu()
