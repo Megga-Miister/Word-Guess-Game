@@ -35,7 +35,7 @@ namespace Word_Guess_Game
 
                 case 2:
                     string[] characterListFromFile = ReadFile(filePath);
-                    string characterList = String.Join(", ", characterListFromFile);
+                    string characterList = String.Join(" ", characterListFromFile);
                     Console.WriteLine($"\n{characterList}\n");
 
                     ReturnToMenu();
@@ -119,6 +119,8 @@ namespace Word_Guess_Game
             string statusMessage = "";
             string[] fileWords = ReadFile(filePath);
 
+            Console.WriteLine(filewords);
+
             for (int i = 0; i < fileWords.Length; i++)
             {
                 if (fileWords[i] == upperCaseWord)
@@ -149,12 +151,14 @@ namespace Word_Guess_Game
 
         static void StartGame(string filePath, string lettersFilePath)
         {
+            //TODO wordDisplay is not properly updating with userguesses
             char[] preppedWordForGame = SelectRandomWordFromFile(filePath);
             char[] hiddenWord = BlankWordDisplay(preppedWordForGame);
             string displayHiddenWord = String.Join(" ",hiddenWord);
             char[] guessedWord = WordDisplay(preppedWordForGame, ' ');
 
             Console.WriteLine($"\nPlease try to guess the following character: {displayHiddenWord}");
+            Console.WriteLine($"preppedWordForGame: {preppedWordForGame}, guessedWord: {guessedWord}");
 
             while (guessedWord != preppedWordForGame)
             {
@@ -163,6 +167,7 @@ namespace Word_Guess_Game
                 string updatedHiddenWord = String.Join(" ", updatedBlankArray);
                 Console.WriteLine($"\nPlease try to guess the following character: {updatedHiddenWord}");
                 LetterGuessList(lettersFilePath, currentLetterGuess);
+                Console.WriteLine($"preppedWordForGame: {preppedWordForGame}, guessedWord: {guessedWord}");
             }
 
             Console.WriteLine("Congrats!\n");
@@ -233,13 +238,14 @@ namespace Word_Guess_Game
 
         static char[] WordDisplay(char[] preparedWordForGame, char letterGuess)
         {
+            //TODO wordDisplay is not properly updating with userguesses
             char[] blankDisplay = BlankWordDisplay(preparedWordForGame);
 
             for (int i = 0; i < preparedWordForGame.Length; i++)
             {
                 if(preparedWordForGame[i] == letterGuess)
                 {
-                    blankDisplay[i] = letterGuess;         
+                    blankDisplay[i] = letterGuess;
                 }
                 else
                 {
