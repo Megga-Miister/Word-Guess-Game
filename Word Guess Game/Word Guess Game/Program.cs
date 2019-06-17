@@ -7,7 +7,7 @@ namespace Word_Guess_Game
     {
         static void Main(string[] args)
         {
-            
+            HomeNavigation();
         }
 
         static void HomeNavigation()
@@ -17,7 +17,7 @@ namespace Word_Guess_Game
             string[] words = new string[] { "FRODO", "GANDALF", "SAMWISE", "ARAGORN", "LEGOLAS", "GIMLI", "BOROMIR", "PEREGRIN", "MERIADOC" };
             string greetingMessage = PesistWordFile(filePath, words);
 
-            Console.WriteLine($"{greetingMessage}\n");
+            Console.WriteLine($"{greetingMessage}");
 
             Console.WriteLine("Please choose from one of the following options:\n");
             Console.WriteLine("     1) Start Game \n     2) View Characters \n     3) Add Character \n     4) Remove Character \n     5) Exit Game");
@@ -34,7 +34,10 @@ namespace Word_Guess_Game
                     break;
 
                 case 2:
-                    ReadFile(filePath);
+                    string[] characterListFromFile = ReadFile(filePath);
+                    string characterList = String.Join(", ", characterListFromFile);
+                    Console.WriteLine($"\n{characterList}\n");
+
                     ReturnToMenu();
                     break;
 
@@ -129,8 +132,8 @@ namespace Word_Guess_Game
                 }
             }
 
-            return statusMessage;
             CreateWordFile(filePath, fileWords);
+            return statusMessage;
         }
 
         public static string[] ReadFile(string filePath)
