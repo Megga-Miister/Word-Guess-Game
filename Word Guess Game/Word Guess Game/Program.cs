@@ -8,7 +8,7 @@ namespace Word_Guess_Game
         static void Main(string[] args)
         {
             string filePath = "../../../guessinggamewords.txt";
-            string[] words = { "FRODO", "GANDALF", "SAMWISE", "ARAGORN", "LEGOLAS", "GIMLI", "BOROMIR", "PEREGRIN", "MERIADOC" };
+            string[] words = new string[] { "FRODO", "GANDALF", "SAMWISE", "ARAGORN", "LEGOLAS", "GIMLI", "BOROMIR", "PEREGRIN", "MERIADOC" };
             string greetingMessage = PesistWordFile(filePath, words);
 
             Console.WriteLine(greetingMessage);
@@ -19,7 +19,7 @@ namespace Word_Guess_Game
 
         }
 
-        static void CreateWordFile(string filePath, string[] words)
+        public static void CreateWordFile(string filePath, string[] words)
         {
             using (StreamWriter sw = new StreamWriter(filePath))
             {
@@ -99,7 +99,13 @@ namespace Word_Guess_Game
 
         static string SelectRandomWordFromFile(string filePath)
         {
+            Random randomGenerator = new Random();
 
+            string[] wordsFromFile = ReadFile(filePath);
+            int randomIndex = randomGenerator.Next(wordsFromFile.Length);
+            string randomWord = wordsFromFile[randomIndex];
+
+            return randomWord;
         }
 
         static char[] PrepareWordForGame(string randomWordFromFile)
