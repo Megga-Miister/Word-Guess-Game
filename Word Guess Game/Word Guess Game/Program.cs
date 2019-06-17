@@ -151,9 +151,10 @@ namespace Word_Guess_Game
         {
             char[] preppedWordForGame = SelectRandomWordFromFile(filePath);
             char[] hiddenWord = BlankWordDisplay(preppedWordForGame);
+            string displayHiddenWord = hiddenWord.ToString();
             char[] guessedWord = WordDisplay(preppedWordForGame, ' ');
 
-            Console.WriteLine($"\nPlease try to guess the following character: {hiddenWord}");
+            Console.WriteLine($"\nPlease try to guess the following character: {displayHiddenWord}");
 
             while (guessedWord != preppedWordForGame)
             {
