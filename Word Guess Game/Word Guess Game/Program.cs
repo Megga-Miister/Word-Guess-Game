@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Word_Guess_Game
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
