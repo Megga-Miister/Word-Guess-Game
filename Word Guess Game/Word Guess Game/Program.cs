@@ -7,15 +7,17 @@ namespace Word_Guess_Game
     {
         static void Main(string[] args)
         {
+            
+        }
+
+        static void HomeNavigation()
+        {
             string filePath = "../../../guessinggamewords.txt";
             string[] words = new string[] { "FRODO", "GANDALF", "SAMWISE", "ARAGORN", "LEGOLAS", "GIMLI", "BOROMIR", "PEREGRIN", "MERIADOC" };
             string greetingMessage = PesistWordFile(filePath, words);
 
             Console.WriteLine(greetingMessage);
-        }
-
-        static void HomeNavigation()
-        {
+            Console.WriteLine("");
 
         }
 
@@ -97,7 +99,7 @@ namespace Word_Guess_Game
 
         }
 
-        static string SelectRandomWordFromFile(string filePath)
+        static char[] SelectRandomWordFromFile(string filePath)
         {
             Random randomGenerator = new Random();
 
@@ -105,13 +107,10 @@ namespace Word_Guess_Game
             int randomIndex = randomGenerator.Next(wordsFromFile.Length);
             string randomWord = wordsFromFile[randomIndex];
 
-            return randomWord;
+            char[] preparedWordForGame = randomWord.ToCharArray();
+            return preparedWordForGame;
         }
 
-        static char[] PrepareWordForGame(string randomWordFromFile)
-        {
-
-        }
 
         static char[] LetterGuessList(char letterGuess)
         {
@@ -139,14 +138,19 @@ namespace Word_Guess_Game
             }
         }
 
-        static char[] WordDisplay(char[] blankWordDisplay, char LetterGuess)
+        static char[] WordDisplay(char[] preparedWordForGame, char LetterGuess)
         {
-
+            char[] blankWordDisplay = new char[preparedWordForGame.Length];
+            for (int i = 0; i < blankWordDisplay.Length; i++)
+            {
+                blankWordDisplay[i] = '_';
+            }
+            return blankWordDisplay;
         }
 
         static char[] BlankWordDisplay(char[] preparedWordForGame)
         {
-
+            
         }
 
         static void ExceptionHandler()

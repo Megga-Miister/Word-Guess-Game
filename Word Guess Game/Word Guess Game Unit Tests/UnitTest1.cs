@@ -20,17 +20,17 @@ namespace Word_Guess_Game_Unit_Tests
             Assert.Equal("True", result);   
         }
 
-        [Fact]
-        public void CanRetrieveAllWordsFromTheFile()
-        {
-            string filePath = "../../../guessinggamewordsretrievetest.txt";
-            string[] testWords = new string[] { "TEST1", "TEST2", "TEST3" };
-            Program.CreateWordFile(filePath, testWords);
+        //[Fact]
+        //public void CanRetrieveAllWordsFromTheFile()
+        //{
+        //    string filePath = "../../../guessinggamewordsretrievetest.txt";
+        //    string[] testWords = new string[] { "TEST1", "TEST2", "TEST3" };
+        //    Program.CreateWordFile(filePath, testWords);
 
-            string[] resultArray = Program.ReadFile(filePath);
+        //    string[] resultArray = Program.ReadFile(filePath);
 
-            Assert.Equal(testWords, resultArray);
-        }
+        //    Assert.Equal(testWords, resultArray);
+        //}
 
         //[Fact]
         //public void LetterDoesExistInWord()
