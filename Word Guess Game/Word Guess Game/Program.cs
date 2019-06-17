@@ -114,7 +114,7 @@ namespace Word_Guess_Game
 
         static char[] LetterGuessList(char letterGuess)
         {
-
+            
         }
 
         static void ReturnToMenu()
@@ -138,7 +138,32 @@ namespace Word_Guess_Game
             }
         }
 
-        static char[] WordDisplay(char[] preparedWordForGame, char LetterGuess)
+        static char UserLetterGuess()
+        {
+            Console.WriteLine("Please enter a letter to guess:");
+            string userGuess = Console.ReadLine();
+
+            try
+            {
+                char letterGuess = char.Parse(userGuess);
+                return letterGuess;
+            }
+            catch(FormatException fe)
+            {
+                Console.WriteLine("You have not entered a letter. Please try again.");
+                UserLetterGuess();
+            }
+        }
+
+        static char[] WordDisplay(char[] preparedWordForGame, char letterGuess)
+        {
+            for (int i = 0; i < preparedWordForGame.Length; i++)
+            {
+                
+            }
+        }
+
+        static char[] BlankWordDisplay(char[] preparedWordForGame)
         {
             char[] blankWordDisplay = new char[preparedWordForGame.Length];
             for (int i = 0; i < blankWordDisplay.Length; i++)
@@ -146,11 +171,6 @@ namespace Word_Guess_Game
                 blankWordDisplay[i] = '_';
             }
             return blankWordDisplay;
-        }
-
-        static char[] BlankWordDisplay(char[] preparedWordForGame)
-        {
-            
         }
 
         static void ExceptionHandler()
