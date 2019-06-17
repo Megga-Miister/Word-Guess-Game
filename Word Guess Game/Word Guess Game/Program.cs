@@ -89,7 +89,7 @@ namespace Word_Guess_Game
 
         static void ExitGame()
         {
-
+            Environment.Exit(0);
         }
 
         static void StartGame()
