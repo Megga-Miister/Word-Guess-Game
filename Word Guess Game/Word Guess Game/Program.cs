@@ -17,9 +17,56 @@ namespace Word_Guess_Game
             string[] words = new string[] { "FRODO", "GANDALF", "SAMWISE", "ARAGORN", "LEGOLAS", "GIMLI", "BOROMIR", "PEREGRIN", "MERIADOC" };
             string greetingMessage = PesistWordFile(filePath, words);
 
-            Console.WriteLine(greetingMessage);
-            Console.WriteLine("");
+            Console.WriteLine($"{greetingMessage}\n");
 
+            Console.WriteLine("Please choose from one of the following options:\n");
+            Console.WriteLine("     1) Start Game \n     2) View Characters \n     3) Add Character \n     4) Remove Character \n     5) Exit Game");
+
+            string userSelection = Console.ReadLine();
+            int actionSelection = Convert.ToInt32(userSelection);
+
+            switch (actionSelection)
+            {
+                case 1:
+                    StartGame(filePath, lettersFilePath);
+                    DeleteFile(lettersFilePath);
+                    ReturnToMenu();
+                    break;
+
+                case 2:
+                    ReadFile(filePath);
+                    ReturnToMenu();
+                    break;
+
+                case 3:
+                    Console.WriteLine("\nPlease write the name of the character you would like to add:");
+                    string newCharacter = Console.ReadLine();
+                    string characterToFile = newCharacter.ToUpper();
+
+                    AddWordToFile(filePath, characterToFile);
+                    Console.WriteLine($"\nYou have added {characterToFile} to the characters list.\n");
+                    ReturnToMenu();
+                    break;
+
+                case 4:
+                    Console.WriteLine("\nPlease write the name of the character you would like to remove:");
+                    string removeCharacter = Console.ReadLine();
+                    string characterFromFile = removeCharacter.ToUpper();
+
+                    string removeMessage = RemoveWordFromFile(characterFromFile);
+                    Console.WriteLine(removeMessage);
+                    ReturnToMenu();
+                    break;
+
+                case 5:
+                    ExitGame();
+                    break;
+
+                default:
+                    ExitGame();
+                    break;
+
+            }
         }
 
         public static void CreateWordFile(string filePath, string[] words)
@@ -66,6 +113,7 @@ namespace Word_Guess_Game
         static string RemoveWordFromFile(string upperCaseWord)
         {
             string filePath = "../../../guessinggamewords.txt";
+            string statusMessage = "";
             string[] fileWords = ReadFile(filePath);
 
             for (int i = 0; i < fileWords.Length; i++)
@@ -73,14 +121,15 @@ namespace Word_Guess_Game
                 if (fileWords[i] == upperCaseWord)
                 {
                     fileWords[i] = "";
-                    return ($"{upperCaseWord} has been removed.\n");
+                    statusMessage = ($"{upperCaseWord} has been removed.\n");
                 }
                 else
                 {
-                    return ($"{upperCaseWord} could not be found.\n");
+                    statusMessage = ($"{upperCaseWord} could not be found.\n");
                 }
             }
 
+            return statusMessage;
             CreateWordFile(filePath, fileWords);
         }
 
@@ -101,7 +150,7 @@ namespace Word_Guess_Game
             char[] hiddenWord = BlankWordDisplay(preppedWordForGame);
             char[] guessedWord = WordDisplay(preppedWordForGame, ' ');
 
-            Console.WriteLine($"Please try to guess the following character: {hiddenWord}");
+            Console.WriteLine($"\nPlease try to guess the following character: {hiddenWord}");
 
             while (guessedWord != preppedWordForGame)
             {
@@ -109,6 +158,8 @@ namespace Word_Guess_Game
                 WordDisplay(preppedWordForGame, currentLetterGuess);
                 LetterGuessList(lettersFilePath, currentLetterGuess);
             }
+
+            Console.WriteLine("Congrats!\n");
         }
 
         static char[] SelectRandomWordFromFile(string filePath)
@@ -132,7 +183,7 @@ namespace Word_Guess_Game
             string[] guessArray = ReadFile(lettersFilePath);
             string guessList = String.Join(" ", guessArray);
 
-            Console.WriteLine($"You have guessed:{guessList}\n");
+            Console.WriteLine($"\nYou have guessed:{guessList}\n");
         }
 
         static void ReturnToMenu()
