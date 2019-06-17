@@ -157,10 +157,20 @@ namespace Word_Guess_Game
 
         static char[] WordDisplay(char[] preparedWordForGame, char letterGuess)
         {
+            char[] blankDisplay = BlankWordDisplay(preparedWordForGame);
+
             for (int i = 0; i < preparedWordForGame.Length; i++)
             {
-                
+                if(preparedWordForGame[i] == letterGuess)
+                {
+                    blankDisplay[i] = letterGuess;         
+                }
+                else
+                {
+                    blankDisplay[i] = '_';
+                }
             }
+            return blankDisplay;
         }
 
         static char[] BlankWordDisplay(char[] preparedWordForGame)
