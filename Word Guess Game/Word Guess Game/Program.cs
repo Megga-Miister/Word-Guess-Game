@@ -112,9 +112,25 @@ namespace Word_Guess_Game
 
         }
 
-        static void GameCompleteOptions()
+        static void ReturnToMenu()
         {
+            Console.WriteLine("Would you like to return to main menu or exit the game? (MENU/EXIT)");
 
+            string userResponse = Console.ReadLine();
+            string userDecision = userResponse.ToUpper();
+
+            if (userDecision == "MENU")
+            {
+                HomeNavigation();
+            }
+            else if (userDecision == "EXIT")
+            {
+                ExitGame();
+            }
+            else
+            {
+                HomeNavigation();
+            }
         }
 
         static char[] WordDisplay(char[] blankWordDisplay, char LetterGuess)
