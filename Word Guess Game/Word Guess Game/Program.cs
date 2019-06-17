@@ -95,9 +95,20 @@ namespace Word_Guess_Game
             Environment.Exit(0);
         }
 
-        static void StartGame()
+        static void StartGame(string filePath, string lettersFilePath)
         {
+            char[] preppedWordForGame = SelectRandomWordFromFile(filePath);
+            char[] hiddenWord = BlankWordDisplay(preppedWordForGame);
+            char[] guessedWord = WordDisplay(preppedWordForGame, ' ');
 
+            Console.WriteLine($"Please try to guess the following character: {hiddenWord}");
+
+            while (guessedWord != preppedWordForGame)
+            {
+                char currentLetterGuess = UserLetterGuess();
+                WordDisplay(preppedWordForGame, currentLetterGuess);
+                LetterGuessList(lettersFilePath, currentLetterGuess);
+            }
         }
 
         static char[] SelectRandomWordFromFile(string filePath)
