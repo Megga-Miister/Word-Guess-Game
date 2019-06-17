@@ -13,6 +13,7 @@ namespace Word_Guess_Game
         static void HomeNavigation()
         {
             string filePath = "../../../guessinggamewords.txt";
+            string lettersFilePath = "../../../guessedletters.txt";
             string[] words = new string[] { "FRODO", "GANDALF", "SAMWISE", "ARAGORN", "LEGOLAS", "GIMLI", "BOROMIR", "PEREGRIN", "MERIADOC" };
             string greetingMessage = PesistWordFile(filePath, words);
 
@@ -112,9 +113,13 @@ namespace Word_Guess_Game
         }
 
 
-        static char[] LetterGuessList(char letterGuess)
+        static string LetterGuessList(string lettersFilePath, char letterGuess)
         {
-            
+            string saveInFileLetter = letterGuess.ToString();
+            AddWordToFile(lettersFilePath, saveInFileLetter);
+
+            string[] guessArray = ReadFile(lettersFilePath);
+            string guessList = String.Join(" ", guessArray);
         }
 
         static void ReturnToMenu()
