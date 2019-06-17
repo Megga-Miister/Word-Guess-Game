@@ -9,28 +9,29 @@ namespace Word_Guess_Game_Unit_Tests
         [Fact]
         public void WordFileCanBeUpdatedWithNewWord()
         {
-            string filePath = "../../../guessinggamewordsupdatetest.txt";
+            string filePath = "../../../guessinggamewordstest.txt";
+            Program.AddWordToFile(filePath, "TESTWORD");
+
             string[] wordsInFile = Program.ReadFile(filePath);
             string wordsString = String.Join(" ", wordsInFile);
-            Program.AddWordToFile(filePath, "TEST WORD");
 
-            bool containing = wordsString.Contains("TEST WORD");
+            bool containing = wordsString.Contains("TESTWORD");
             string result = containing.ToString();
 
             Assert.Equal("True", result);   
         }
 
-        //[Fact]
-        //public void CanRetrieveAllWordsFromTheFile()
-        //{
-        //    string filePath = "../../../guessinggamewordsretrievetest.txt";
-        //    string[] testWords = new string[] { "TEST1", "TEST2", "TEST3" };
-        //    Program.CreateWordFile(filePath, testWords);
+        [Fact]
+        public void CanRetrieveAllWordsFromTheFile()
+        {
+            string filePath = "../../../guessinggamewordstest.txt";
+            string[] testWords = new string[] { "TEST1", "TEST2", "TEST3" };
+            Program.CreateWordFile(filePath, testWords);
 
-        //    string[] resultArray = Program.ReadFile(filePath);
+            string[] resultArray = Program.ReadFile(filePath);
 
-        //    Assert.Equal(testWords, resultArray);
-        //}
+            Assert.Equal(testWords, resultArray);
+        }
 
         //[Fact]
         //public void LetterDoesExistInWord()
