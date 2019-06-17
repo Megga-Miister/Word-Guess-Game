@@ -7,11 +7,11 @@ namespace Word_Guess_Game
     {
         static void Main(string[] args)
         {
-            string filePath = "../../../words.txt";
+            string filePath = "../../../guessinggamewords.txt";
             string[] words = { "FRODO", "GANDALF", "SAMWISE", "ARAGORN", "LEGOLAS", "GIMLI", "BOROMIR", "PEREGRIN", "MERIADOC" };
+            string greetingMessage = PesistWordFile(filePath, words);
 
-            Console.WriteLine("Welcome to the Lord of the Rings Character Guessing Game!");
-            Console.WriteLine(" ");
+            Console.WriteLine(greetingMessage);
         }
 
         static void HomeNavigation()
@@ -23,6 +23,7 @@ namespace Word_Guess_Game
         {
             using (StreamWriter sw = new StreamWriter(filePath))
             {
+
                 foreach (string word in words)
                 {
                     if (word != null)
@@ -33,14 +34,51 @@ namespace Word_Guess_Game
             }
         }
 
-        static void AddWordToFile(string word)
+        static string PesistWordFile(string filePath, string[] words)
         {
-
+            if (!File.Exists(filePath))
+            {
+                CreateWordFile(filePath, words);
+                return "Welcome to the Lord of the Rings Character Guessing Game!";
+            }
+            else
+            {
+                return "Welcome back to the Lord of the Rings Character Guessing Game!";
+            }
         }
 
-        static void RemoveWordFromFile(string word)
+        static void AddWordToFile(string filePath, string newWord)
         {
+            using (StreamWriter sw = File.AppendText(filePath))
+            {
+                sw.WriteLine(newWord);
+            }
+        }
 
+        static void DeleteFile(string filePath)
+        {
+            File.Delete(filePath);
+        }
+
+        static string RemoveWordFromFile(string upperCaseWord)
+        {
+            string filePath = "../../../guessinggamewords.txt";
+            string[] fileWords = File.ReadAllLines(filePath);
+
+            for (int i = 0; i < fileWords.Length; i++)
+            {
+                if (fileWords[i] == upperCaseWord)
+                {
+                    fileWords[i] = "";
+                    return ($"{upperCaseWord} has been removed.");
+                }
+                else
+                {
+                    return ($"{upperCaseWord} could not be found.");
+                }
+            }
+
+            CreateWordFile(filePath, fileWords);
         }
 
         static void ExitGame()
