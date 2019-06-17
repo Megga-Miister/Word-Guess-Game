@@ -42,11 +42,11 @@ namespace Word_Guess_Game
             if (!File.Exists(filePath))
             {
                 CreateWordFile(filePath, words);
-                return "Welcome to the Lord of the Rings Character Guessing Game!";
+                return "Welcome to the Lord of the Rings Character Guessing Game!\n";
             }
             else
             {
-                return "Welcome back to the Lord of the Rings Character Guessing Game!";
+                return "Welcome back to the Lord of the Rings Character Guessing Game!\n";
             }
         }
 
@@ -73,11 +73,11 @@ namespace Word_Guess_Game
                 if (fileWords[i] == upperCaseWord)
                 {
                     fileWords[i] = "";
-                    return ($"{upperCaseWord} has been removed.");
+                    return ($"{upperCaseWord} has been removed.\n");
                 }
                 else
                 {
-                    return ($"{upperCaseWord} could not be found.");
+                    return ($"{upperCaseWord} could not be found.\n");
                 }
             }
 
@@ -113,18 +113,20 @@ namespace Word_Guess_Game
         }
 
 
-        static string LetterGuessList(string lettersFilePath, char letterGuess)
+        static void LetterGuessList(string lettersFilePath, char letterGuess)
         {
             string saveInFileLetter = letterGuess.ToString();
             AddWordToFile(lettersFilePath, saveInFileLetter);
 
             string[] guessArray = ReadFile(lettersFilePath);
             string guessList = String.Join(" ", guessArray);
+
+            Console.WriteLine($"You have guessed:{guessList}\n");
         }
 
         static void ReturnToMenu()
         {
-            Console.WriteLine("Would you like to return to main menu or exit the game? (MENU/EXIT)");
+            Console.WriteLine("Would you like to return to main menu or exit the game? (MENU/EXIT)\n");
 
             string userResponse = Console.ReadLine();
             string userDecision = userResponse.ToUpper();
@@ -148,16 +150,17 @@ namespace Word_Guess_Game
             Console.WriteLine("Please enter a letter to guess:");
             string userGuess = Console.ReadLine();
 
-            try
-            {
+            //try
+            //{
                 char letterGuess = char.Parse(userGuess);
                 return letterGuess;
-            }
-            catch(FormatException fe)
-            {
-                Console.WriteLine("You have not entered a letter. Please try again.");
-                UserLetterGuess();
-            }
+            //}
+            //catch(FormatException fe)
+            //{
+            //    Console.WriteLine("You have not entered a valid letter. Please try again.");
+            //    UserLetterGuess();
+            //    return '';
+            //}
         }
 
         static char[] WordDisplay(char[] preparedWordForGame, char letterGuess)
@@ -186,11 +189,6 @@ namespace Word_Guess_Game
                 blankWordDisplay[i] = '_';
             }
             return blankWordDisplay;
-        }
-
-        static void ExceptionHandler()
-        {
-
         }
 
     }
