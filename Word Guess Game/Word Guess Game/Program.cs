@@ -32,7 +32,6 @@ namespace Word_Guess_Game
             {
                 case 1:
                     StartGame(filePath, lettersFilePath);
-                    DeleteFile(lettersFilePath);
                     ReturnToMenu();
                     break;
                 case 2:
@@ -204,11 +203,14 @@ namespace Word_Guess_Game
             {
                 char currentLetterGuess = UserLetterGuess();
                 char[] updatedBlankArray = WordDisplay(preppedWordForGame, currentLetterGuess);
+
+
                 string updatedHiddenWord = String.Join(" ", updatedBlankArray);
                 Console.WriteLine($"\nPlease try to guess the following character: {updatedHiddenWord}");
                 LetterGuessList(lettersFilePath, currentLetterGuess);
             }
 
+            DeleteFile(lettersFilePath);
             Console.WriteLine("Congrats!\n");
         }
 
@@ -233,7 +235,7 @@ namespace Word_Guess_Game
         /// Takes user letter guess and either creates a new file or adds to an existing file so user can 
         /// see their previous guesses
         /// </summary>
-        /// <param name="lettersFilePath">Location or destination of file to store user guessed letters</param>
+        /// <param name=ePath">Location or destination of file to store user guessed letters</param>
         /// <param name="letterGuess">Particular character the user has guessed</param>
         static void LetterGuessList(string lettersFilePath, char letterGuess)
         {
@@ -301,8 +303,7 @@ namespace Word_Guess_Game
         /// <returns></returns>
         static char[] WordDisplay(char[] preparedWordForGame, char letterGuess)
         {
-            //TODO wordDisplay is not properly updating with userguesses
-            char[] blankDisplay = BlankWordDisplay(preparedWordForGame);
+            char[] blankDisplay = new char[preparedWordForGame.Length];
 
             for (int i = 0; i < preparedWordForGame.Length; i++)
             {
@@ -332,6 +333,5 @@ namespace Word_Guess_Game
             }
             return blankWordDisplay;
         }
-
     }
 }
