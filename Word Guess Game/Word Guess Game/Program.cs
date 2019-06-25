@@ -143,7 +143,6 @@ namespace Word_Guess_Game
         /// <returns>A message letting user know if character was removed or didn't exist on character list</returns>
         static string RemoveWordFromFile(string upperCaseWord)
         {
-            //TODO word not removing from file
             string filePath = "../../../guessinggamewords.txt";
             string statusMessage = "";
             string[] fileWords = ReadFile(filePath);
@@ -191,14 +190,15 @@ namespace Word_Guess_Game
         /// <param name="lettersFilePath">Location of file that will contain all user guesses from</param>
         static void StartGame(string filePath, string lettersFilePath)
         {
-            //TODO wordDisplay is not properly updating with userguesses
             char[] preppedWordForGame = SelectRandomWordFromFile(filePath);
+            string displayWordForGame = new string(preppedWordForGame);
             char[] hiddenWord = BlankWordDisplay(preppedWordForGame);
             string displayHiddenWord = String.Join(" ",hiddenWord);
             char[] guessedWord = WordDisplay(preppedWordForGame, ' ');
+            string displayGuessedWord = new string(guessedWord);
 
             Console.WriteLine($"\nPlease try to guess the following character: {displayHiddenWord}");
-            Console.WriteLine($"preppedWordForGame: {preppedWordForGame}, guessedWord: {guessedWord}");
+            Console.WriteLine($"preppedWordForGame: {displayWordForGame}, guessedWord: {displayGuessedWord}");
 
             while (guessedWord != preppedWordForGame)
             {
@@ -207,7 +207,6 @@ namespace Word_Guess_Game
                 string updatedHiddenWord = String.Join(" ", updatedBlankArray);
                 Console.WriteLine($"\nPlease try to guess the following character: {updatedHiddenWord}");
                 LetterGuessList(lettersFilePath, currentLetterGuess);
-                //Console.WriteLine($"preppedWordForGame: {preppedWordForGame}, guessedWord: {guessedWord}");
             }
 
             Console.WriteLine("Congrats!\n");
