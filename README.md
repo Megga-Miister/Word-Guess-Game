@@ -51,17 +51,22 @@ Then select and open ```Word Guess Game.sln```
 ------------------------------
 
 ## Visuals
-***[Add screenshots of your application in action]***
 
 ##### Application Start
 ![Screenshot of Main Menu Prompt Upon App Start](\assets\ApplicationStart.JPG)
+
 ##### Using the Application
 ![Screenshot of initial View Characters selection](\assets\ViewCharacters.JPG)
+
+
 ![Screenshot of Add Character selection](\assets\AddCharacter.JPG)
+
+
 ![Screenshot of Remove Character selection](\assets\RemoveCharacter.JPG)
 
 
 ------------------------------
 
 ## Change Log
-
+1.1 Fixed error and bugs, added comments, wrote missing tests. Known bug: persisting the updatedBlankArray with user 
+	answers, which breaks game. 6/25/19 - Triplett
