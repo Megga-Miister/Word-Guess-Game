@@ -32,7 +32,6 @@ namespace Word_Guess_Game
             {
                 case 1:
                     StartGame(filePath, lettersFilePath);
-                    DeleteFile(lettersFilePath);
                     ReturnToMenu();
                     break;
                 case 2:
@@ -143,7 +142,6 @@ namespace Word_Guess_Game
         /// <returns>A message letting user know if character was removed or didn't exist on character list</returns>
         static string RemoveWordFromFile(string upperCaseWord)
         {
-            //TODO word not removing from file
             string filePath = "../../../guessinggamewords.txt";
             string statusMessage = "";
             string[] fileWords = ReadFile(filePath);
@@ -191,14 +189,14 @@ namespace Word_Guess_Game
         /// <param name="lettersFilePath">Location of file that will contain all user guesses from</param>
         static void StartGame(string filePath, string lettersFilePath)
         {
-            //TODO wordDisplay is not properly updating with userguesses
             char[] preppedWordForGame = SelectRandomWordFromFile(filePath);
+            string displayWordForGame = new string(preppedWordForGame);
             char[] hiddenWord = BlankWordDisplay(preppedWordForGame);
             string displayHiddenWord = String.Join(" ",hiddenWord);
             char[] guessedWord = WordDisplay(preppedWordForGame, ' ');
+            string displayGuessedWord = new string(guessedWord);
 
             Console.WriteLine($"\nPlease try to guess the following character: {displayHiddenWord}");
-            Console.WriteLine($"preppedWordForGame: {preppedWordForGame}, guessedWord: {guessedWord}");
 
             while (guessedWord != preppedWordForGame)
             {
@@ -207,9 +205,10 @@ namespace Word_Guess_Game
                 string updatedHiddenWord = String.Join(" ", updatedBlankArray);
                 Console.WriteLine($"\nPlease try to guess the following character: {updatedHiddenWord}");
                 LetterGuessList(lettersFilePath, currentLetterGuess);
-                //Console.WriteLine($"preppedWordForGame: {preppedWordForGame}, guessedWord: {guessedWord}");
+
             }
 
+            DeleteFile(lettersFilePath);
             Console.WriteLine("Congrats!\n");
         }
 
@@ -234,7 +233,7 @@ namespace Word_Guess_Game
         /// Takes user letter guess and either creates a new file or adds to an existing file so user can 
         /// see their previous guesses
         /// </summary>
-        /// <param name="lettersFilePath">Location or destination of file to store user guessed letters</param>
+        /// <param name=ePath">Location or destination of file to store user guessed letters</param>
         /// <param name="letterGuess">Particular character the user has guessed</param>
         static void LetterGuessList(string lettersFilePath, char letterGuess)
         {
@@ -281,17 +280,17 @@ namespace Word_Guess_Game
             Console.WriteLine("Please enter a letter to guess:");
             string userGuess = Console.ReadLine();
 
-            //try
-            //{
+            try
+            {
                 char letterGuess = char.Parse(userGuess);
                 return letterGuess;
-            //}
-            //catch(FormatException fe)
-            //{
-            //    Console.WriteLine("You have not entered a valid letter. Please try again.");
-            //    UserLetterGuess();
-            //    return '';
-            //}
+            }
+            catch (FormatException fe)
+            {
+                Console.WriteLine("You have not entered a valid letter. Please try again.");
+                UserLetterGuess();
+                return '-';
+            }
         }
 
         /// <summary>
@@ -300,10 +299,9 @@ namespace Word_Guess_Game
         /// <param name="preparedWordForGame">Character name formatted for game</param>
         /// <param name="letterGuess">Formatted user character guess</param>
         /// <returns></returns>
-        static char[] WordDisplay(char[] preparedWordForGame, char letterGuess)
+        public static char[] WordDisplay(char[] preparedWordForGame, char letterGuess)
         {
-            //TODO wordDisplay is not properly updating with userguesses
-            char[] blankDisplay = BlankWordDisplay(preparedWordForGame);
+            char[] blankDisplay = new char[preparedWordForGame.Length];
 
             for (int i = 0; i < preparedWordForGame.Length; i++)
             {
@@ -333,6 +331,5 @@ namespace Word_Guess_Game
             }
             return blankWordDisplay;
         }
-
     }
 }
