@@ -33,16 +33,26 @@ namespace Word_Guess_Game_Unit_Tests
             Assert.Equal(testWords, resultArray);
         }
 
-        //[Fact]
-        //public void LetterDoesExistInWord()
-        //{
-        //    contains();
-        //}
+        [Fact]
+        public void LetterDoesExistInWord()
+        {
+            char[] testWord = { 'T', 'E', 'S', 'T' };
+            char testLetter = 'E';
+            string testExample = Convert.ToString(Program.WordDisplay(testWord, testLetter));
+            bool testResult = testExample.Contains('e');
 
-        //[Fact]
-        //public void LetterDoesNotExistInWord()
-        //{
+            Assert.True(testResult);
+        }
 
-        //}
+        [Fact]
+        public void LetterDoesNotExistInWord()
+        {
+            char[] testWord = { 'T', 'E', 'S', 'T' };
+            char testLetter = 'F';
+            string testExample = Convert.ToString(Program.WordDisplay(testWord, testLetter));
+            bool testResult = testExample.Contains('F');
+
+            Assert.False(testResult);
+        }
     }
 }

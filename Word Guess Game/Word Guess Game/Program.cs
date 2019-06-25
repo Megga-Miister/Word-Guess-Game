@@ -197,17 +197,15 @@ namespace Word_Guess_Game
             string displayGuessedWord = new string(guessedWord);
 
             Console.WriteLine($"\nPlease try to guess the following character: {displayHiddenWord}");
-            Console.WriteLine($"preppedWordForGame: {displayWordForGame}, guessedWord: {displayGuessedWord}");
 
             while (guessedWord != preppedWordForGame)
             {
                 char currentLetterGuess = UserLetterGuess();
                 char[] updatedBlankArray = WordDisplay(preppedWordForGame, currentLetterGuess);
-
-
                 string updatedHiddenWord = String.Join(" ", updatedBlankArray);
                 Console.WriteLine($"\nPlease try to guess the following character: {updatedHiddenWord}");
                 LetterGuessList(lettersFilePath, currentLetterGuess);
+
             }
 
             DeleteFile(lettersFilePath);
@@ -282,17 +280,17 @@ namespace Word_Guess_Game
             Console.WriteLine("Please enter a letter to guess:");
             string userGuess = Console.ReadLine();
 
-            //try
-            //{
+            try
+            {
                 char letterGuess = char.Parse(userGuess);
                 return letterGuess;
-            //}
-            //catch(FormatException fe)
-            //{
-            //    Console.WriteLine("You have not entered a valid letter. Please try again.");
-            //    UserLetterGuess();
-            //    return '';
-            //}
+            }
+            catch (FormatException fe)
+            {
+                Console.WriteLine("You have not entered a valid letter. Please try again.");
+                UserLetterGuess();
+                return '-';
+            }
         }
 
         /// <summary>
@@ -301,7 +299,7 @@ namespace Word_Guess_Game
         /// <param name="preparedWordForGame">Character name formatted for game</param>
         /// <param name="letterGuess">Formatted user character guess</param>
         /// <returns></returns>
-        static char[] WordDisplay(char[] preparedWordForGame, char letterGuess)
+        public static char[] WordDisplay(char[] preparedWordForGame, char letterGuess)
         {
             char[] blankDisplay = new char[preparedWordForGame.Length];
 
