@@ -59,7 +59,7 @@ Then select and open ```Word Guess Game.sln```
 ![Screenshot of initial View Characters selection](\assets\ViewCharacters.JPG)
 
 
-![Screenshot of Add Character selection](\assets\AddCharacter.JPG)
+![Screenshot of Add Character selection](https://raw.githubusercontent.com/Meggan-Triplett/Word-Guess-Game/master/assets/AddCharacter.JPG)
 
 
 ![Screenshot of Remove Character selection](\assets\RemoveCharacter.JPG)
